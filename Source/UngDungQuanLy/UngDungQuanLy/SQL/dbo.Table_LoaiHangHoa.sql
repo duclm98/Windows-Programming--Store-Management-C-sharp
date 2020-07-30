@@ -1,0 +1,5 @@
+﻿CREATE TABLE [dbo].[LoaiHangHoa]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [TenLoai] NTEXT NOT NULL
+)

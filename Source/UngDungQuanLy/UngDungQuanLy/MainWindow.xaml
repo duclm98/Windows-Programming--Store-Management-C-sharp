@@ -1,0 +1,606 @@
+﻿<Window x:Class="UngDungQuanLy.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mschart="clr-namespace:System.Windows.Forms.DataVisualization.Charting;assembly=System.Windows.Forms.DataVisualization"
+        xmlns:local="clr-namespace:UngDungQuanLy"
+        mc:Ignorable="d"
+        Title="Quản lý cửa hàng" Width="1366" Height="730" Left="-10" Top="-5" WindowState="Maximized" >
+    <Canvas VerticalAlignment="Top">
+        <TabControl x:Name="tabControl" SelectedIndex="1" Canvas.Left="0" Canvas.Top="0" Width="1368" Height="700" Margin="0,0,0,0">
+            <TabItem Name="TabHangHoa" Header="Hàng hóa" Loaded="TabHangHoa_Loaded" PreviewMouseDown="TabHangHoa_PreviewMouseDown">
+
+                <Grid Background="#FFE5E5E5">
+                    <!--Chia thành 3 cột chính-->
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="400" ></ColumnDefinition>
+                        <ColumnDefinition Width="3" ></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0" >
+                        <!--Chia thành 7 dòng-->
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"></RowDefinition>
+                            <!--Dòng chứa tiêu đề-->
+
+                            <RowDefinition Height="100"></RowDefinition>
+                            <!--Dòng chứa 3 button-->
+
+                            <RowDefinition Height="200"></RowDefinition>
+                            <!--Dòng chứa hình ảnh-->
+
+                            <RowDefinition Height="30"></RowDefinition>
+                            <!--Dòng chưa button thêm hình ảnh-->
+
+                            <RowDefinition Height="230"></RowDefinition>
+                            <!--Dòng chứa các thông tin về sản phẩm-->
+
+                            <RowDefinition Height="20"></RowDefinition>
+                            <!--Dòng chứa thông báo-->
+
+                            <RowDefinition Height="20"></RowDefinition>
+                            <!--Dòng chứa thông báo-->
+
+                            <RowDefinition Height="30"></RowDefinition>
+                            <!--Dòng chưa 3 button thêm, xóa, sửa-->
+
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="QUẢN LÝ HÀNG HÓA" Grid.Row="0" FontSize="30" HorizontalAlignment="Center"></TextBlock>
+
+                        <Grid Grid.Row="1">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="133"></ColumnDefinition>
+                                <ColumnDefinition Width="134"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Button Grid.Column="0" Name="BtnThemHangHoa" Click="BtnThemHangHoa_Click">
+                                <Canvas>
+                                    <TextBlock Text="THÊM" Canvas.Left="-40" Canvas.Top="-38" FontSize="30"></TextBlock>
+                                    <TextBlock Text="HÀNG HÓA" Canvas.Left="-51" Canvas.Top="7" FontSize="20"/>
+                                </Canvas>
+                            </Button>
+                            <Button Grid.Column="1" Name="BtnSuaHangHoa" Click="BtnSuaHangHoa_Click">
+                                <Canvas>
+                                    <TextBlock Text="SỬA" Canvas.Left="-29" Canvas.Top="-38" FontSize="30"></TextBlock>
+                                    <TextBlock Text="HÀNG HÓA" Canvas.Left="-51" Canvas.Top="7" FontSize="20"/>
+                                </Canvas>
+                            </Button>
+                            <Button Grid.Column="2" Name="BtnXoaHangHoa" Click="BtnXoaHangHoa_Click">
+                                <Canvas>
+                                    <TextBlock Text="XÓA" Canvas.Left="-29" Canvas.Top="-38" FontSize="30"></TextBlock>
+                                    <TextBlock Text="HÀNG HÓA" Canvas.Left="-51" Canvas.Top="7" FontSize="20"/>
+                                </Canvas>
+                            </Button>
+                        </Grid>
+
+                        <Image Name="ImageProduct" Grid.Row="2"/>
+                        <Button Name="BtnChonHinh" Content="Thêm hình ảnh hàng hóa" Grid.Row="3" FontSize="20" Click="BtnChonHinh_Click" 
+                                Background="AliceBlue" HorizontalAlignment="Stretch"></Button>
+
+                        <Grid Grid.Row="4">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"></RowDefinition>
+                                <RowDefinition Height="30"></RowDefinition>
+                                <RowDefinition Height="20"></RowDefinition>
+                                <RowDefinition Height="30"></RowDefinition>
+                                <RowDefinition Height="30"></RowDefinition>
+                                <RowDefinition Height="30"></RowDefinition>
+                                <RowDefinition Height="30"></RowDefinition>
+                                <RowDefinition Height="30"></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Tên hàng hóa:" Grid.Row="0" Grid.Column="0" FontSize="20"></TextBlock>
+                            <TextBox Name="TbTenHangHoa" Grid.Row="0" Grid.Column="1" FontSize="20"></TextBox>
+
+                            <TextBlock Text="Loại:" Grid.Row="1" Grid.Column="0" FontSize="20"></TextBlock>
+                            <ComboBox Name="CbLoai" Grid.Row="1" Grid.Column="1" FontSize="20">
+                                <!--<ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding TenChungLoai}"></TextBlock>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>-->
+                            </ComboBox>
+
+                            <TextBlock Text="Thêm loai hàng hóa mới" Grid.Row="2" Grid.Column="0"></TextBlock>
+                            <TextBox Name="TbThemChungLoai" Grid.Row="2" Grid.Column="1" Width="200" HorizontalAlignment="Left"></TextBox>
+                            <Button Name="BtnThemChungLoai" Content="Thêm" Grid.Row="2" Grid.Column="1" Click="BtnThemChungLoai_Click" HorizontalAlignment="Right"></Button>
+
+                            <TextBlock Text="Số lượng:" Grid.Row="3" Grid.Column="0" FontSize="20"></TextBlock>
+                            <TextBox Name="TbSoLuong" Grid.Row="3" Grid.Column="1" FontSize="20"></TextBox>
+
+                            <TextBlock Text="Giá niêm yết:" Grid.Row="4" Grid.Column="0" FontSize="20"></TextBlock>
+                            <TextBox Name="TbGiaNiemyet" Grid.Row="4" Grid.Column="1" FontSize="20"></TextBox>
+
+                            <TextBlock Text="Giá bán lẻ:" Grid.Row="5" Grid.Column="0" FontSize="20"></TextBlock>
+                            <TextBox Name="TbGiaBanLe" Grid.Row="5" Grid.Column="1" FontSize="20"></TextBox>
+
+                            <TextBlock Text="Giá thực tế:" Grid.Row="6" Grid.Column="0" FontSize="20"></TextBlock>
+                            <TextBox Name="TbGiaThucTe" Grid.Row="6" Grid.Column="1" FontSize="20"></TextBox>
+
+                            <TextBlock Text="Ngày thêm (sửa):" Grid.Row="7" Grid.Column="0" FontSize="20"></TextBlock>
+                            <DatePicker Name="DPNgayThem" Grid.Row="7" Grid.Column="1" FontSize="20"></DatePicker>
+
+                        </Grid>
+
+                        <TextBlock Text="Phải điền đầy đủ tên, loại, số lượng, giá niêm yết, giá bán lẻ và ngày thêm"
+                                   Grid.Row="5" ></TextBlock>
+                        <TextBlock Name="TBlThongBao" Grid.Row="6" Foreground="#FFDA0A0A"></TextBlock>
+
+                        <Grid Grid.Row="7">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="133"></ColumnDefinition>
+                                <ColumnDefinition Width="133"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Button Name="BtnThem" Content="THÊM" Grid.Column="0" Click="BtnThem_Click" FontSize="20"></Button>
+                            <Button Name="BtnSua" Content="SỬA" Grid.Column="1" Click="BtnSua_Click" FontSize="20"></Button>
+                            <Button Name="BtnXoa" Content="XÓA" Grid.Column="2" Click="BtnXoa_Click" FontSize="20"></Button>
+
+                        </Grid>
+
+                    </Grid>
+
+                    <TextBlock Grid.Column="1" Background="Black"></TextBlock>
+
+                    <Grid Grid.Column="2">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="10"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="DANH SÁCH HÀNG HÓA" Grid.Row="0" FontSize="30" HorizontalAlignment="Center"></TextBlock>
+
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="160"></ColumnDefinition>
+                                <ColumnDefinition Width="300"></ColumnDefinition>
+                                <ColumnDefinition Width="85"></ColumnDefinition>
+
+                                <ColumnDefinition Width="40"></ColumnDefinition>
+
+                                <ColumnDefinition Width="170"></ColumnDefinition>
+
+                                <ColumnDefinition Width="70"></ColumnDefinition>
+
+                                <ColumnDefinition Width="50"></ColumnDefinition>
+                                <ColumnDefinition Width="35"></ColumnDefinition>
+                                <ColumnDefinition Width="50"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <ComboBox Name="CbLoaiTimKiem" Grid.Column="0" FontSize="20"></ComboBox>
+                            <TextBox Name="TbTimKiem" Grid.Column="1" FontSize="20"></TextBox>
+                            <Button Name="BtnTimKiem" Content="Tìm kiếm" Grid.Column="2" Click="BtnTimKiem_Click" FontSize="20"></Button>
+                            <ComboBox Name="CbLoaiSapXep" Grid.Column="4" SelectionChanged="CbLoaiSapXep_SelectionChanged" FontSize="20"></ComboBox>
+                            <Button Name="BtnTrangTruoc" Content="Prev" Grid.Column="6" FontSize="20" Click="BtnTrangTruoc_Click"></Button>
+                            <TextBlock Name="TBlTrangHienTai" Text="1" Grid.Column="7" FontSize="20" HorizontalAlignment="Center"/>
+                            <Button Name="BtnTrangSau" Content="Next" Grid.Column="8" FontSize="20" Click="BtnTrangSau_Click"></Button>
+
+                        </Grid>
+
+                        <Grid Grid.Row="3">
+                            <DataGrid x:Name="dataGrid" Margin="10" SelectionChanged="dataGrid_SelectionChanged" IsReadOnly="True"
+                                      AutoGenerateColumns="False" CanUserAddRows="False">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Binding="{Binding Id}" Header="Mã hàng hóa" Width="80"></DataGridTextColumn>
+                                    <DataGridTextColumn Binding="{Binding Loai}" Header="Loại hàng hóa" Width="100"></DataGridTextColumn>
+                                    <DataGridTextColumn Binding="{Binding Ten}" Header="Tên hàng hóa" Width="250"></DataGridTextColumn>
+                                    <DataGridTextColumn Binding="{Binding SoLuong}" Header="Số lượng" Width="60"></DataGridTextColumn>
+                                    <DataGridTextColumn Binding="{Binding GiaNiemYet}" Header="Giá niêm yết" Width="100"></DataGridTextColumn>
+                                    <DataGridTextColumn Binding="{Binding GiaBanLe}" Header="Giá bán lẻ" Width="100"></DataGridTextColumn>
+                                    <DataGridTextColumn Binding="{Binding GiaThucTe}" Header="Giá thực tế" Width="100"></DataGridTextColumn>
+                                    <DataGridTextColumn Binding="{Binding NgayCapNhat}" Header="Ngày cập nhật" Width="141"></DataGridTextColumn>
+                                </DataGrid.Columns>
+
+                            </DataGrid>
+
+                        </Grid>
+
+                    </Grid>
+
+                </Grid>
+
+            </TabItem>
+
+            <TabItem Name="TabGiaoDich" Header="Giao dịch" Loaded="TabGiaoDich_Loaded" PreviewMouseDown="TabGiaoDich_PreviewMouseDown" >
+
+                <Grid Background="#FFE5E5E5">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="500"></ColumnDefinition>
+                        <ColumnDefinition Width="80"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="DANH SÁCH HÀNG HÓA" Grid.Row="0" FontSize="30" HorizontalAlignment="Center"></TextBlock>
+
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="160"></ColumnDefinition>
+                                <ColumnDefinition Width="250"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <ComboBox Name="CbLoaiTimKiem1" Grid.Column="0" FontSize="20"></ComboBox>
+                            <TextBox Name="TbTimKiem1" Grid.Column="1" FontSize="20"></TextBox>
+                            <Button Name="BtnTimKiem1" Content="Tìm kiếm" Grid.Column="2" Click="BtnTimKiem1_Click" FontSize="20"></Button>
+                        </Grid>
+
+                        <DataGrid x:Name="dataGrid1" Grid.Row="2" Margin="10" IsReadOnly="True"
+                                      AutoGenerateColumns="False" CanUserAddRows="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding Id}" Header="Mã hàng hóa"></DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding Loai}" Header="Loại hàng hóa"></DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding Ten}" Header="Tên hàng hóa" Width="160"></DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding SoLuong}" Header="Số lượng"></DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding GiaBanLe}" Header="Giá bán lẻ" Width="89"></DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+
+                    <Grid Grid.Column="1">
+                        <Canvas>
+                            <Button Name="BtnChon" Content="Chọn" Canvas.Top="262" Click="BtnChon_Click" FontSize="20" Width="80"/>
+                            <Button Name="BtnBoChon" Content="Bỏ chọn" Click="BtnBoChon_Click" FontSize="20" Canvas.Top="298" Width="80"></Button>
+                        </Canvas>
+                    </Grid>
+
+                    <Grid Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"></RowDefinition>
+                            <RowDefinition Height="90"></RowDefinition>
+                            <RowDefinition Height="280"></RowDefinition>
+                            <RowDefinition Height="20"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="HÓA ĐƠN BÁN HÀNG" FontSize="30" HorizontalAlignment="Center"></TextBlock>
+
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="140"></ColumnDefinition>
+                                <ColumnDefinition Width="240"></ColumnDefinition>
+                                <ColumnDefinition Width="20"></ColumnDefinition>
+                                <ColumnDefinition Width="140"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Column="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Text="Số hóa đơn:" Grid.Row="0" FontSize="20"></TextBlock>
+                                <TextBlock Text="Ngày giao dịch:" Grid.Row="2" FontSize="20"></TextBlock>
+
+                            </Grid>
+
+                            <Grid Grid.Column="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Name="TbSoHoaDon" Grid.Row="0" FontSize="20"></TextBlock>
+                                <DatePicker Name="DPNgayGiaoDich" Grid.Row="2" FontSize="20"></DatePicker>
+
+                            </Grid>
+
+                            <Grid Grid.Column="3">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Text="Khách hàng:" Grid.Row="0" FontSize="20"></TextBlock>
+                                <TextBlock Text="Số điện thoại:" Grid.Row="1" FontSize="20"></TextBlock>
+                                <TextBlock Text="Địa chỉ:" Grid.Row="2" FontSize="20"></TextBlock>
+
+                            </Grid>
+
+                            <Grid Grid.Column="4">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                </Grid.RowDefinitions>
+
+                                <TextBox Name="TbKhachHang" Grid.Row="0" FontSize="20"></TextBox>
+                                <TextBox Name="TbSdt" Grid.Row="1" FontSize="20"></TextBox>
+                                <TextBox Name="TbDiaChi" Grid.Row="2" FontSize="20"></TextBox>
+
+                            </Grid>
+                        </Grid>
+
+                        <DataGrid x:Name="dataGrid2" Grid.Row="2" SelectionChanged="dataGrid2_SelectionChanged"
+                                  Margin="10" IsReadOnly="true"
+                                      AutoGenerateColumns="False" CanUserAddRows="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding stt}" Header="Stt" Width="50"></DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding ten}" Header="Tên hàng hóa" Width="310"></DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding soLuong}" Header="Số lượng"></DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding donGia}" Header="Đơn giá (VND)" Width="130"></DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding giam}" Header="Giảm (%)" Width="80"></DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding thanhTien}" Header="Thành tiền" Width="130"></DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <Grid Grid.Row="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="110"></ColumnDefinition>
+                                <ColumnDefinition Width="100"></ColumnDefinition>
+                                <ColumnDefinition Width="30"></ColumnDefinition>
+                                <ColumnDefinition Width="260"></ColumnDefinition>
+                                <ColumnDefinition Width="100"></ColumnDefinition>
+                                <ColumnDefinition Width="50"></ColumnDefinition>
+                                <ColumnDefinition Width="100"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" Text="Chọn số lượng:" FontSize="15"></TextBlock>
+                            <TextBox Grid.Column="1" Name="TbSoLuongTab2"></TextBox>
+                            <TextBlock Grid.Column="3" Text="Chọn khuyến mãi cho 1 hàng hóa (%):" FontSize="15"></TextBlock>
+                            <TextBox Grid.Column="4" Name="TbGiamGiaTab2"></TextBox>
+                            <Button Grid.Column="6" Name="BtnXacNhan" Content="Xác nhận" Click="BtnXacNhan_Click"></Button>
+                        </Grid>
+
+                        <Grid Grid.Row="4">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"></RowDefinition>
+                                <RowDefinition Height="30"></RowDefinition>
+                                <RowDefinition Height="30"></RowDefinition>
+                                <RowDefinition Height="30"></RowDefinition>
+                                <RowDefinition Height="30"></RowDefinition>
+                                <RowDefinition Height="10"></RowDefinition>
+                                <RowDefinition Height="30"></RowDefinition>
+                                <RowDefinition Height="10"></RowDefinition>
+                                <RowDefinition Height="30"></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Text="__________ Thanh toán _________________________________________________________"
+                                       Grid.Row="0" FontSize="20"></TextBlock>
+
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="160"></ColumnDefinition>
+                                    <ColumnDefinition Width="100"></ColumnDefinition>
+
+                                    <ColumnDefinition Width="10"></ColumnDefinition>
+
+                                    <ColumnDefinition Width="90"></ColumnDefinition>
+                                    <ColumnDefinition Width="35"></ColumnDefinition>
+
+                                    <ColumnDefinition Width="20"></ColumnDefinition>
+
+                                    <ColumnDefinition Width="160"></ColumnDefinition>
+                                    <ColumnDefinition Width="100"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="Tổng tiền (VND):" FontSize="20"></TextBlock>
+                                <TextBlock Name="TblTongTien" FontSize="20" Grid.Column="1"></TextBlock>
+                                <TextBlock Text="Giảm (%):" FontSize="20" Grid.Column="3"></TextBlock>
+                                <TextBox Name="TbGiam" FontSize="20" Grid.Column="4" Text="0"></TextBox>
+                                <TextBlock Text="Tổng cộng (VND):" Grid.Column="6" FontSize="20"></TextBlock>
+                                <TextBlock Name="TblTongCong" FontSize="20" Grid.Column="7"></TextBlock>
+                                <Button Name="BtnTinhTien1" Grid.Column="8" Content="Tính" Click="BtnTinhTien1_Click" FontSize="20"></Button>
+                            </Grid>
+
+                            <Grid Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="160"></ColumnDefinition>
+                                    <ColumnDefinition Width="200"></ColumnDefinition>
+                                    <ColumnDefinition Width="14*"/>
+                                    <ColumnDefinition Width="127*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="Khách đưa (VND):" FontSize="20" Grid.ColumnSpan="2" Margin="0,0,199,0"></TextBlock>
+                                <TextBox Name="TbTienKhachDua" FontSize="20" Grid.Column="1" Grid.ColumnSpan="2" Margin="1,0,39.5,0"></TextBox>
+
+                            </Grid>
+
+                            <Grid Grid.Row="3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="160"></ColumnDefinition>
+                                    <ColumnDefinition Width="200"></ColumnDefinition>
+                                    <ColumnDefinition Width="315"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="Trả lại (VND):" FontSize="20"></TextBlock>
+                                <TextBlock Name="TblTienTraLai" FontSize="20" Grid.Column="1"></TextBlock>
+                                <Button Name="BtnTinhTien2" Content="Tính" Grid.Column="3" Click="BtnTinhTien2_Click" FontSize="20"></Button>
+
+                            </Grid>
+
+                            <Grid Grid.Row="4">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="250"></ColumnDefinition>
+                                    <ColumnDefinition Width="300"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <Button Name="BtnThanhToan" Content="Giao hàng - Thanh toán" Grid.Column="2" Click="BtnThanhToan_Click" FontSize="20"></Button>
+
+                            </Grid>
+
+                            <Grid Grid.Row="6">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="250"></ColumnDefinition>
+                                    <ColumnDefinition Width="300"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="Trạng thái:" Grid.Column="0" FontSize="20"></TextBlock>
+                                <TextBlock Name="TblDaGiaoHang" Text="Đã giao hàng - Đã thanh toán" Grid.Column="2" FontSize="20" HorizontalAlignment="Center" Background="Red"></TextBlock>
+
+                            </Grid>
+
+                            <Grid Grid.Row="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="560"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <Button Grid.Column="1" Name="BtnLamMoi" Content="Tạo đơn hàng mới =>" Click="BtnLamMoi_Click" FontSize="20"></Button>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+
+                </Grid>
+            </TabItem>
+
+            <TabItem Name="TabThongKe" Header="Thống kê" Loaded="TabThongKe_Loaded" PreviewMouseDown="TabThongKe_PreviewMouseDown">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"></ColumnDefinition>
+                        <ColumnDefinition Width="10"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+
+                            <RowDefinition Height="20"></RowDefinition>
+
+                            <RowDefinition Height="20"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+
+                            <RowDefinition Height="20"></RowDefinition>
+
+                            <RowDefinition Height="20"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+
+                            <RowDefinition Height="20"></RowDefinition>
+
+                            <RowDefinition Height="30"></RowDefinition>
+
+                            <RowDefinition Height="20"></RowDefinition>
+
+                            <RowDefinition Height="30"></RowDefinition>
+
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Text="BÁO CÁO" HorizontalAlignment="Center" FontSize="30"></TextBlock>
+                        <TextBlock Grid.Row="1" Text="Bán hàng -" HorizontalAlignment="Center" FontSize="20"></TextBlock>
+                        <TextBlock Grid.Row="2" Text="Doanh thu" HorizontalAlignment="Center" FontSize="20"></TextBlock>
+                        <TextBlock Grid.Row="4" Text="Từ ngày:" FontSize="15"></TextBlock>
+                        <DatePicker Grid.Row="5" Name="DPNgayBatDau" FontSize="20"></DatePicker>
+                        <TextBlock Grid.Row="7" Text="Đến ngày:" FontSize="15"></TextBlock>
+                        <DatePicker Grid.Row="8" Name="DPNgayKetThuc" FontSize="20"></DatePicker>
+                        <Button Grid.Row="10" Name="BtnXuatBaoCao" Content="Xuất báo cáo"
+                                FontSize="20" Click="BtnXuatBaoCao_Click"></Button>
+                        <Button Grid.Row="12" Name="BtnXuatExcel" Content="Xuất ra Excel" FontSize="20"
+                                Click="BtnXuatExcel_Click"></Button>
+                    </Grid>
+
+                    <Grid Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"></RowDefinition>
+                            <RowDefinition Height="20"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="400"></RowDefinition>
+                            <RowDefinition Height="20"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Text="Thống kê bán hàng - doanh thu" FontSize="30" HorizontalAlignment="Center"></TextBlock>
+                        <TextBlock Name="TblKhoangThoiGian" Grid.Row="1" FontSize="15" HorizontalAlignment="Center"></TextBlock>
+                        <ComboBox Name="CbSapXepTab3" Grid.Row="2" Width="170" SelectionChanged="CbSapXepTab3_SelectionChanged"
+                                  HorizontalAlignment="Right" Margin="0,0,10,0" FontSize="15"></ComboBox>
+                        <DataGrid x:Name="dataGrid3" Grid.Row="3" SelectionChanged="dataGrid2_SelectionChanged"
+                                  Margin="10" IsReadOnly="true"
+                                      AutoGenerateColumns="False" CanUserAddRows="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding SoHoaDon}" Header="Số hóa đơn" ></DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding MaHangHoa}" Header="Mã hàng hóa" ></DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding TenHangHoa}" Header="Tên hàng hóa" Width="300"></DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding DonGia}" Header="Đơn giá (VND)"></DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding SoLuong}" Header="Số lượng"></DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding ThanhTien}" Header="Thành tiền"></DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding NgayGiaoDich}" Header="Ngày bán" Width="150"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Ghi chú" Width="*"></DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <Grid Grid.Row="4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"></ColumnDefinition>
+                                <ColumnDefinition Width="200"></ColumnDefinition>
+                                <ColumnDefinition Width="220"></ColumnDefinition>
+                                <ColumnDefinition Width="50"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" Text="Tổng doanh thu (VNĐ):" FontSize="15"></TextBlock>
+                            <TextBlock Grid.Column="1" Name="TblTongDoanhThu" FontSize="15"></TextBlock>
+                            <TextBlock Grid.Column="2" Text="Tổng số hàng hóa đã bán được:" FontSize="15"></TextBlock>
+                            <TextBlock Grid.Column="3" Name="TblTongSoHangHoa" FontSize="15"></TextBlock>
+                        </Grid>
+
+                        <Grid Grid.Row="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"></ColumnDefinition>
+                                <ColumnDefinition Width="700"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" Text="10 sản phầm bán chạy nhất:" FontSize="15"></TextBlock>
+
+                            <DataGrid x:Name="dataGrid4" Grid.Column="1" SelectionChanged="dataGrid2_SelectionChanged"
+                                  Margin="10" IsReadOnly="true"
+                                      AutoGenerateColumns="False" CanUserAddRows="False">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Binding="{Binding MaHangHoa}" Header="Mã hàng hóa" ></DataGridTextColumn>
+                                    <DataGridTextColumn Binding="{Binding TenHangHoa}" Header="Tên hàng hóa" Width="350"></DataGridTextColumn>
+                                    <DataGridTextColumn Binding="{Binding SoLuong}" Header="Số lượng bán được"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Ghi chú" Width="*"></DataGridTextColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+
+                        <Grid Grid.Row="6">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="100"></ColumnDefinition>
+                                <ColumnDefinition Width="20"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            
+                        </Grid>
+                    </Grid>
+
+                </Grid>
+            </TabItem>
+
+        </TabControl>
+        <Button x:Name="BtnThoat" Content="Thoát" Canvas.Left="189" Canvas.Top="2" Click="BtnThoat_Click" Background="#FFE5E5E5"/>
+    </Canvas>
+</Window>

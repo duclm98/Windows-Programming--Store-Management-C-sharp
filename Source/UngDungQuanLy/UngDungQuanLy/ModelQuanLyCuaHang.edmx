@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="QuanLyCuaHangModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="GiaoDich">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SoHoaDon" Type="int" />
+          <Property Name="NgayGiaoDich" Type="date" />
+          <Property Name="TenKhachHang" Type="ntext" />
+          <Property Name="DiaChi" Type="ntext" />
+          <Property Name="Sdt" Type="text" />
+          <Property Name="MaHangHoa" Type="int" />
+          <Property Name="SoLuong" Type="int" />
+          <Property Name="DonGia" Type="int" />
+          <Property Name="Giam" Type="int" />
+          <Property Name="ThanhTien" Type="int" />
+          <Property Name="TenHangHoa" Type="ntext" />
+        </EntityType>
+        <EntityType Name="HangHoa">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Loai" Type="ntext" Nullable="false" />
+          <Property Name="Ten" Type="ntext" />
+          <Property Name="SoLuong" Type="int" />
+          <Property Name="GiaNiemYet" Type="int" />
+          <Property Name="GiaBanLe" Type="int" />
+          <Property Name="GiaThucTe" Type="int" />
+          <Property Name="NgayCapNhat" Type="date" />
+          <Property Name="HinhAnh" Type="image" />
+        </EntityType>
+        <EntityType Name="LoaiHangHoa">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenLoai" Type="ntext" Nullable="false" />
+        </EntityType>
+        <Function Name="Procedure_Lay10HangHoaBanChay" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="param1" Type="datetime" Mode="In" />
+          <Parameter Name="param2" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="Procedure_LayTatCaTenLoai" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Procedure_Xoa1HangHoa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="param1" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="QuanLyCuaHangModelStoreContainer">
+          <EntitySet Name="GiaoDich" EntityType="Self.GiaoDich" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HangHoa" EntityType="Self.HangHoa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoaiHangHoa" EntityType="Self.LoaiHangHoa" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QuanLyCuaHangModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="QuanLyCuaHangEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="HangHoa" EntityType="QuanLyCuaHangModel.HangHoa" />
+          <EntitySet Name="LoaiHangHoa" EntityType="QuanLyCuaHangModel.LoaiHangHoa" />
+          <FunctionImport Name="Procedure_LayTatCaTenLoai" ReturnType="Collection(String)" />
+          <FunctionImport Name="Procedure_Xoa1HangHoa">
+          <Parameter Name="param1" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Procedure_SapXepGiaGiamDan" ReturnType="Collection(QuanLyCuaHangModel.Procedure_SapXepGiaGiamDan_Result)" />
+          <FunctionImport Name="Procedure_SapXepGiaTangDan" ReturnType="Collection(QuanLyCuaHangModel.Procedure_SapXepGiaTangDan_Result)" />
+          <FunctionImport Name="Procedure_SapXepLoaiA__Z" ReturnType="Collection(QuanLyCuaHangModel.Procedure_SapXepLoaiA__Z_Result)" />
+          <FunctionImport Name="Procedure_SapXepMoiNhatHienLenTren" ReturnType="Collection(QuanLyCuaHangModel.Procedure_SapXepMoiNhatHienLenTren_Result)" />
+          <FunctionImport Name="Procedure_SapXepTenA__Z" ReturnType="Collection(QuanLyCuaHangModel.Procedure_SapXepTenA__Z_Result)" />
+          <EntitySet Name="GiaoDich" EntityType="QuanLyCuaHangModel.GiaoDich" />
+          <FunctionImport Name="Procedure_Lay10HangHoaBanChay" ReturnType="Collection(QuanLyCuaHangModel.Procedure_Lay10HangHoaBanChay_Result)">
+            <Parameter Name="param1" Mode="In" Type="DateTime" />
+            <Parameter Name="param2" Mode="In" Type="DateTime" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="HangHoa">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Loai" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Ten" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SoLuong" Type="Int32" />
+          <Property Name="GiaNiemYet" Type="Int32" />
+          <Property Name="GiaBanLe" Type="Int32" />
+          <Property Name="GiaThucTe" Type="Int32" />
+          <Property Name="NgayCapNhat" Type="DateTime" Precision="0" />
+          <Property Name="HinhAnh" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="LoaiHangHoa">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenLoai" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <ComplexType Name="Procedure_SapXepGiaGiamDan_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Loai" Nullable="false" MaxLength="Max" />
+          <Property Type="String" Name="Ten" Nullable="true" MaxLength="Max" />
+          <Property Type="Int32" Name="SoLuong" Nullable="true" />
+          <Property Type="Int32" Name="GiaNiemYet" Nullable="true" />
+          <Property Type="Int32" Name="GiaBanLe" Nullable="true" />
+          <Property Type="Int32" Name="GiaThucTe" Nullable="true" />
+          <Property Type="DateTime" Name="NgayCapNhat" Nullable="true" />
+          <Property Type="Binary" Name="HinhAnh" Nullable="true" MaxLength="Max" />
+        </ComplexType>
+        <ComplexType Name="Procedure_SapXepGiaTangDan_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Loai" Nullable="false" MaxLength="Max" />
+          <Property Type="String" Name="Ten" Nullable="true" MaxLength="Max" />
+          <Property Type="Int32" Name="SoLuong" Nullable="true" />
+          <Property Type="Int32" Name="GiaNiemYet" Nullable="true" />
+          <Property Type="Int32" Name="GiaBanLe" Nullable="true" />
+          <Property Type="Int32" Name="GiaThucTe" Nullable="true" />
+          <Property Type="DateTime" Name="NgayCapNhat" Nullable="true" />
+          <Property Type="Binary" Name="HinhAnh" Nullable="true" MaxLength="Max" />
+        </ComplexType>
+        <ComplexType Name="Procedure_SapXepLoaiA__Z_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Loai" Nullable="false" MaxLength="Max" />
+          <Property Type="String" Name="Ten" Nullable="true" MaxLength="Max" />
+          <Property Type="Int32" Name="SoLuong" Nullable="true" />
+          <Property Type="Int32" Name="GiaNiemYet" Nullable="true" />
+          <Property Type="Int32" Name="GiaBanLe" Nullable="true" />
+          <Property Type="Int32" Name="GiaThucTe" Nullable="true" />
+          <Property Type="DateTime" Name="NgayCapNhat" Nullable="true" />
+          <Property Type="Binary" Name="HinhAnh" Nullable="true" MaxLength="Max" />
+        </ComplexType>
+        <ComplexType Name="Procedure_SapXepMoiNhatHienLenTren_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Loai" Nullable="false" MaxLength="Max" />
+          <Property Type="String" Name="Ten" Nullable="true" MaxLength="Max" />
+          <Property Type="Int32" Name="SoLuong" Nullable="true" />
+          <Property Type="Int32" Name="GiaNiemYet" Nullable="true" />
+          <Property Type="Int32" Name="GiaBanLe" Nullable="true" />
+          <Property Type="Int32" Name="GiaThucTe" Nullable="true" />
+          <Property Type="DateTime" Name="NgayCapNhat" Nullable="true" />
+          <Property Type="Binary" Name="HinhAnh" Nullable="true" MaxLength="Max" />
+        </ComplexType>
+        <ComplexType Name="Procedure_SapXepTenA__Z_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Loai" Nullable="false" MaxLength="Max" />
+          <Property Type="String" Name="Ten" Nullable="true" MaxLength="Max" />
+          <Property Type="Int32" Name="SoLuong" Nullable="true" />
+          <Property Type="Int32" Name="GiaNiemYet" Nullable="true" />
+          <Property Type="Int32" Name="GiaBanLe" Nullable="true" />
+          <Property Type="Int32" Name="GiaThucTe" Nullable="true" />
+          <Property Type="DateTime" Name="NgayCapNhat" Nullable="true" />
+          <Property Type="Binary" Name="HinhAnh" Nullable="true" MaxLength="Max" />
+        </ComplexType>
+        <EntityType Name="GiaoDich">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SoHoaDon" Type="Int32" />
+          <Property Name="NgayGiaoDich" Type="DateTime" Precision="0" />
+          <Property Name="TenKhachHang" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Sdt" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MaHangHoa" Type="Int32" />
+          <Property Name="SoLuong" Type="Int32" />
+          <Property Name="DonGia" Type="Int32" />
+          <Property Name="Giam" Type="Int32" />
+          <Property Name="ThanhTien" Type="Int32" />
+          <Property Name="TenHangHoa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <ComplexType Name="Procedure_Lay10HangHoaBanChay_Result">
+          <Property Type="Int32" Name="MaHangHoa" Nullable="true" />
+          <Property Type="String" Name="TenHangHoa" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="SoLuong" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QuanLyCuaHangModelStoreContainer" CdmEntityContainer="QuanLyCuaHangEntities" >
+          <EntitySetMapping Name="HangHoa">
+            <EntityTypeMapping TypeName="QuanLyCuaHangModel.HangHoa">
+              <MappingFragment StoreEntitySet="HangHoa">
+                <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
+                <ScalarProperty Name="NgayCapNhat" ColumnName="NgayCapNhat" />
+                <ScalarProperty Name="GiaThucTe" ColumnName="GiaThucTe" />
+                <ScalarProperty Name="GiaBanLe" ColumnName="GiaBanLe" />
+                <ScalarProperty Name="GiaNiemYet" ColumnName="GiaNiemYet" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="Loai" ColumnName="Loai" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoaiHangHoa">
+            <EntityTypeMapping TypeName="QuanLyCuaHangModel.LoaiHangHoa">
+              <MappingFragment StoreEntitySet="LoaiHangHoa">
+                <ScalarProperty Name="TenLoai" ColumnName="TenLoai" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Procedure_LayTatCaTenLoai" FunctionName="QuanLyCuaHangModel.Store.Procedure_LayTatCaTenLoai" />
+          <FunctionImportMapping FunctionImportName="Procedure_Xoa1HangHoa" FunctionName="QuanLyCuaHangModel.Store.Procedure_Xoa1HangHoa" />
+          <EntitySetMapping Name="GiaoDich">
+            <EntityTypeMapping TypeName="QuanLyCuaHangModel.GiaoDich">
+              <MappingFragment StoreEntitySet="GiaoDich">
+                <ScalarProperty Name="TenHangHoa" ColumnName="TenHangHoa" />
+                <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
+                <ScalarProperty Name="Giam" ColumnName="Giam" />
+                <ScalarProperty Name="DonGia" ColumnName="DonGia" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+                <ScalarProperty Name="MaHangHoa" ColumnName="MaHangHoa" />
+                <ScalarProperty Name="Sdt" ColumnName="Sdt" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="TenKhachHang" ColumnName="TenKhachHang" />
+                <ScalarProperty Name="NgayGiaoDich" ColumnName="NgayGiaoDich" />
+                <ScalarProperty Name="SoHoaDon" ColumnName="SoHoaDon" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Procedure_Lay10HangHoaBanChay" FunctionName="QuanLyCuaHangModel.Store.Procedure_Lay10HangHoaBanChay">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuanLyCuaHangModel.Procedure_Lay10HangHoaBanChay_Result">
+                <ScalarProperty Name="MaHangHoa" ColumnName="MaHangHoa" />
+                <ScalarProperty Name="TenHangHoa" ColumnName="TenHangHoa" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
